@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Assignment 2 till 1DV610-kodkvalité kurs",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "lint": "npx eslint ./UnitConverter.js || exit 0",
-    "lint:fix": "npx eslint ./UnitConverter.js --fix || exit 0"
+    "test": "node ./UnitConverter/test.js",
+    "lint": "npx eslint ./UnitConverter/UnitConverter.js || exit 0",
+    "lint:fix": "npx eslint ./UnitConverter/UnitConverter.js --fix || exit 0"
   },
   "keywords": [],
   "author": "Jakob Rejdemyhr <jr223mt@student.lnu.se>",
