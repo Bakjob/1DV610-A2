@@ -19,6 +19,10 @@ How to add to your project:
     hours
     days
     seconds
+    milliseconds
+    microseconds
+    nanoseconds
+    picoseconds
 
 ## Supported temperature conversion types:
     celsius
@@ -30,6 +34,7 @@ How to add to your project:
     kilograms
     pounds
     ounces
+    stones
 
 ## Supported length conversion types:
     meters
@@ -47,12 +52,14 @@ How to add to your project:
     pints
     cups
 
+## Converting arrays is also supported using the same methods.
+
 ## Example use of module:
 ![weightConverter](./exampleUse.png)
 
 ## Explanation:
     Every converter method takes in 3 different parameters.
-    The first one is the amount of units to convert.
+    The first one is the amount of units to convert. Or an array with an amount of units.
     The second one is the unit to convert from.
     The third on is the unit to convert to.
     In this example we are using the weightConverter to convert 1 kilogram to pounds.

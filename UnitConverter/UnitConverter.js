@@ -4,21 +4,31 @@
 export class UnitConverter {
   // General validation for numbers.
   #validateNumber(number) {
-    return !isNaN(number)
+    if (typeof number !== 'number' || isNaN(number)) {
+      // Return a clear error message for invalid number
+      console.error(`Invalid input: ${number}. Expected a valid number.`)
+      return false
+    } else {
+      return true
+    }
   }
 
   // Unit groups for every supported type. This can be expanded with more units. Only here for validation purposes.
   #unitGroups = {
-    time: ['minutes', 'hours', 'days', 'seconds'],
+    time: ['minutes', 'hours', 'days', 'seconds', 'milliseconds', 'microseconds', 'nanoseconds', 'picoseconds'],
     temp: ['celsius', 'fahrenheit', 'kelvin'],
-    weight: ['grams', 'kilograms', 'pounds', 'ounces'],
+    weight: ['grams', 'kilograms', 'pounds', 'ounces', 'stones',],
     length: ['meters', 'kilometers', 'inches', 'feet', 'yards', 'miles'],
     volume: ['liters', 'milliliters', 'gallons', 'quarts', 'pints', 'cups']
   }
 
   // Validering för att säkerställa att enheten finns inom en given grupp
   #validateUnit(unit, group) {
-    return this.#unitGroups[group].includes(unit)
+    if (!this.#unitGroups[group].includes(unit)) {
+      console.error(`Invalid unit: ${unit}. Valid units for ${group} are ${this.#unitGroups[group].join(', ')}`)
+      return false
+    }
+    return true
   }
 
   // Conversion factors for every supported type. Very easy to add more types later.
@@ -27,7 +37,11 @@ export class UnitConverter {
       seconds: { minutes: 1 / 60, hours: 1 / 3600, days: 1 / 86400, seconds: 1 },
       minutes: { seconds: 60, hours: 1 / 60, days: 1 / 1440, minutes: 1 },
       hours: { seconds: 3600, minutes: 60, days: 1 / 24, hours: 1 },
-      days: { seconds: 86400, minutes: 1440, hours: 24, days: 1 }
+      days: { seconds: 86400, minutes: 1440, hours: 24, days: 1 },
+      milliseconds: { seconds: 0.001, minutes: 1 / 60000, hours: 1 / 3600000, days: 1 / 86400000, milliseconds: 1 },
+      microseconds: { seconds: 1 / 1000000, minutes: 1 / 60000000, hours: 1 / 3600000000, days: 1 / 86400000000, microseconds: 1 },
+      nanoseconds: { seconds: 1 / 1000000000, minutes: 1 / 60000000000, hours: 1 / 3600000000000, days: 1 / 86400000000000, nanoseconds: 1 },
+      picoseconds: { seconds: 1 / 1000000000000, minutes: 1 / 60000000000000, hours: 1 / 3600000000000000, days: 1 / 86400000000000000, picoseconds: 1 }
     },
     temp: {
       celsius: {
@@ -50,7 +64,8 @@ export class UnitConverter {
       grams: { kilograms: 1 / 1000, pounds: 0.00220462, ounces: 0.035274 },
       kilograms: { grams: 1000, pounds: 2.20462, ounces: 35.274 },
       pounds: { grams: 453.592, kilograms: 0.453592, ounces: 16 },
-      ounces: { grams: 28.3495, kilograms: 0.0283495, pounds: 0.0625 }
+      ounces: { grams: 28.3495, kilograms: 0.0283495, pounds: 0.0625 },
+      stones: { grams: 6350.29, kilograms: 6.35029, pounds: 14, ounces: 224 }
     },
     length: {
       meters: { kilometers: 0.001, inches: 39.3701, feet: 3.28084, yards: 1.09361, miles: 0.000621371 },
@@ -72,39 +87,93 @@ export class UnitConverter {
 
   // The main conversion method.
   #convert(number, fromUnit, toUnit, group) {
+    if (number < 0 && group === 'time') { // Negative time values are not supported.
+      console.error('Negative time values are not supported.')
+      return 'invalidInput'
+    }
+
+    if (number === Infinity || number === -Infinity) { // Infinite values are not allowed.
+      console.error('Infinite values are not allowed.')
+      return 'invalidInput'
+    }
+
     if (!this.#validateNumber(number)) { // Validate the number first.
       return 'invalidInput'
     }
+
     if (!this.#validateUnit(fromUnit, group) || !this.#validateUnit(toUnit, group)) { // Validate the units.
       return 'invalidInput'
     }
 
-    // Get the conversion factor.
+    // Get the conversion factor from the conversionFactors object and store it in a variable.
     const factor = this.#conversionFactors[group][fromUnit][toUnit]
 
-    console.log(factor)
-
-    return typeof factor === 'function' ? factor(number) : number * factor
+    // If the factor is a function, call it with the number as an argument. Otherwise, multiply the number with the factor.
+    if (typeof factor === 'function') {
+      return factor(number)
+    } else {
+      return number * factor
+    }
   }
 
-  // Specific methods for every supported type.
+  /**
+   * Converts a unit type from one unit to another in the groups object in conversionFactors.
+   *
+   * @param {number} number - The number to convert.
+   * @param {number} fromUnit - The unit to convert from.
+   * @param {number} toUnit - The unit to convert to.
+   * @returns - The converted value.
+   */
   timeConverter(number, fromUnit, toUnit) {
-    return this.#convert(number, fromUnit, toUnit, 'time')
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'time');
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'time');
+    }
   }
 
   tempConverter(number, fromUnit, toUnit) {
-    return this.#convert(number, fromUnit, toUnit, 'temp')
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'temp')
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'temp')
+    }
   }
 
   weightConverter(number, fromUnit, toUnit) {
-    return this.#convert(number, fromUnit, toUnit, 'weight')
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'weight')
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'weight')
+    }
   }
 
   lengthConverter(number, fromUnit, toUnit) {
-    return this.#convert(number, fromUnit, toUnit, 'length')
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'length')
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'length')
+    }
   }
 
   volumeConverter(number, fromUnit, toUnit) {
-    return this.#convert(number, fromUnit, toUnit, 'volume')
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'volume')
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'volume')
+    }
+  }
+
+  /**
+   * Converts an array of values from one unit to another in the groups object in conversionFactors.
+   * 
+   * @param {number[]} values - The values to convert.
+   * @param {number} fromUnit - The unit to convert from.
+   * @param {number} toUnit - The unit to convert to.
+   * @param {number} group - The group to convert within.
+   * @returns - The converted values.
+   */
+  #batchConvert(values, fromUnit, toUnit, group) {
+    return values.map(value => this.#convert(value, fromUnit, toUnit, group))
   }
 }

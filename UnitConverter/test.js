@@ -31,6 +31,10 @@ console.log('60 minutes to hours: ', minsToHours)
 const daysToSecs = Converter.timeConverter(1, 'days', 'seconds')
 console.log('One day in seconds: ', daysToSecs)
 
+// Testfall 7 with an array as input.
+const daysToSecsArray = Converter.timeConverter([1, 2, 3], 'days', 'seconds')
+console.log('Array of days to seconds: ', daysToSecsArray)
+
 // temp TESTS #####################################################################################################
 console.log('temp TESTS #####################################################################################################')
 
