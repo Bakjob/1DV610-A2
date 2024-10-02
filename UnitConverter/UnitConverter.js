@@ -10,7 +10,7 @@ export class UnitConverter {
    * @param {string} toUnit - The unit to convert to. Can be 'minutes', 'hours', 'days', or 'seconds'.
    * @returns {number | boolean} - The converted value, or false if the input is invalid.
    */
-  timeConverter (number, fromUnit, toUnit) {
+  timeConverter(number, fromUnit, toUnit) {
     if (!this.#validateNumber(number)) {
       return 'invalidInput'
     }
@@ -35,14 +35,7 @@ export class UnitConverter {
     }
   }
 
-  /**
-   * Converts a number of minutes to a specified unit of time.
-   *
-   * @param {string} fromUnit - The unit type to convert from.
-   * @param {number} number - The number of minutes to convert.
-   * @returns {number} - The converted value.
-   */
-  #convertToMinutes (fromUnit, number) {
+  #convertToMinutes(fromUnit, number) {
     if (fromUnit === 'seconds') {
       return number / 60
     } else if (fromUnit === 'hours') {
@@ -54,14 +47,7 @@ export class UnitConverter {
     }
   }
 
-  /**
-   * Converts a number of minutes to a specified unit of time.
-   *
-   * @param {string} fromUnit - The unit type to convert from.
-   * @param {number} number - The number of minutes to convert.
-   * @returns {number} - The converted value.
-   */
-  #convertToHours (fromUnit, number) {
+  #convertToHours(fromUnit, number) {
     if (fromUnit === 'minutes') {
       return number / 60
     } else if (fromUnit === 'seconds') {
@@ -73,7 +59,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToDays (fromUnit, number) {
+  #convertToDays(fromUnit, number) {
     if (fromUnit === 'minutes') {
       return number / 1440
     } else if (fromUnit === 'hours') {
@@ -85,7 +71,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToSeconds (fromUnit, number) {
+  #convertToSeconds(fromUnit, number) {
     if (fromUnit === 'minutes') {
       return number * 60
     } else if (fromUnit === 'hours') {
@@ -105,7 +91,7 @@ export class UnitConverter {
    * @param {string} toUnit - The unit to convert to. Can be 'celsius', 'fahrenheit', or 'kelvin'.
    * @returns {number | boolean} - The converted value, or false if the input is invalid.
    */
-  tempConverter (number, fromUnit, toUnit) {
+  tempConverter(number, fromUnit, toUnit) {
     if (!this.#validateNumber(number)) {
       return 'invalidInput'
     }
@@ -128,7 +114,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToCelsius (fromUnit, number) {
+  #convertToCelsius(fromUnit, number) {
     if (fromUnit === 'fahrenheit') {
       return (number - 32) * 5 / 9
     } else if (fromUnit === 'kelvin') {
@@ -138,7 +124,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToFahrenheit (fromUnit, number) {
+  #convertToFahrenheit(fromUnit, number) {
     if (fromUnit === 'celsius') {
       return number * 9 / 5 + 32
     } else if (fromUnit === 'kelvin') {
@@ -148,7 +134,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToKelvin (fromUnit, number) {
+  #convertToKelvin(fromUnit, number) {
     if (fromUnit === 'celsius') {
       return number + 273.15
     } else if (fromUnit === 'fahrenheit') {
@@ -159,13 +145,13 @@ export class UnitConverter {
   }
 
   /**
-   * 
+   *
    * @param {number} number - The number of units to convert.
    * @param {string} fromUnit - The unit type to convert from. Can be 'grams', 'kilograms', 'ounces' or 'pounds'.
-   * @param {*} toUnit 
-   * @returns 
+   * @param {*} toUnit
+   * @returns
    */
-  weightConverter (number, fromUnit, toUnit) {
+  weightConverter(number, fromUnit, toUnit) {
     if (!this.#validateNumber(number)) {
       return 'invalidInput'
     }
@@ -190,7 +176,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToGrams (fromUnit, number) {
+  #convertToGrams(fromUnit, number) {
     if (fromUnit === 'kilograms') {
       return number * 1000
     } else if (fromUnit === 'pounds') {
@@ -202,7 +188,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToKilograms (fromUnit, number) {
+  #convertToKilograms(fromUnit, number) {
     if (fromUnit === 'grams') {
       return number / 1000
     } else if (fromUnit === 'pounds') {
@@ -214,7 +200,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToPounds (fromUnit, number) {
+  #convertToPounds(fromUnit, number) {
     if (fromUnit === 'grams') {
       return number / 453.592
     } else if (fromUnit === 'kilograms') {
@@ -226,7 +212,7 @@ export class UnitConverter {
     }
   }
 
-  #convertToOunces (fromUnit, number) {
+  #convertToOunces(fromUnit, number) {
     if (fromUnit === 'grams') {
       return number / 28.3495
     } else if (fromUnit === 'kilograms') {
@@ -235,7 +221,143 @@ export class UnitConverter {
       return number * 16
     } else {
       return number
+    }
   }
+
+  /**
+   * Converts a number of length units to a specific unit of length.
+   *
+   * @param {number} number - The number of units to convert.
+   * @param {string} fromUnit - The unit type to convert from. Can be 'meters', 'kilometers', 'inches', 'feet', 'yards', or 'miles'.
+   * @param {string} toUnit - The unit to convert to. Can be 'meters', 'kilometers', 'inches', 'feet', 'yards', or 'miles'.
+   * @returns {number | boolean} - The converted value, or false if the input is invalid.
+   */
+  lengthConverter(number, fromUnit, toUnit) {
+    if (!this.#validateNumber(number)) {
+      return 'invalidInput'
+    }
+
+    if (!this.#validateLengthUnitType(toUnit)) {
+      return 'invalidInput'
+    }
+
+    if (!this.#validateLengthUnitType(fromUnit)) {
+      return 'invalidInput'
+    }
+
+    switch (toUnit) {
+      case 'meters':
+        return this.#convertToMeters(fromUnit, number)
+      case 'kilometers':
+        return this.#convertToKilometers(fromUnit, number)
+      case 'inches':
+        return this.#convertToInches(fromUnit, number)
+      case 'feet':
+        return this.#convertToFeet(fromUnit, number)
+      case 'yards':
+        return this.#convertToYards(fromUnit, number)
+      case 'miles':
+        return this.#convertToMiles(fromUnit, number)
+    }
+  }
+
+  #convertToMeters(fromUnit, number) {
+    if (fromUnit === 'kilometers') {
+      return number * 1000
+    } else if (fromUnit === 'inches') {
+      return number / 39.37
+    } else if (fromUnit === 'feet') {
+      return number / 3.281
+    } else if (fromUnit === 'yards') {
+      return number / 1.094
+    } else if (fromUnit === 'miles') {
+      return number * 1609.34
+    } else {
+      return number
+    }
+  }
+
+  #convertToKilometers(fromUnit, number) {
+    if (fromUnit === 'meters') {
+      return number / 1000
+    } else if (fromUnit === 'inches') {
+      return number / 39370.079
+    } else if (fromUnit === 'feet') {
+      return number / 3280.84
+    } else if (fromUnit === 'yards') {
+      return number / 1093.613
+    } else if (fromUnit === 'miles') {
+      return number * 1.609
+    } else {
+      return number
+    }
+  }
+
+  #convertToInches(fromUnit, number) {
+    if (fromUnit === 'meters') {
+      return number * 39.37
+    } else if (fromUnit === 'kilometers') {
+      return number * 39370.079
+    } else if (fromUnit === 'feet') {
+      return number * 12
+    } else if (fromUnit === 'yards') {
+      return number * 36
+    } else if (fromUnit === 'miles') {
+      return number * 63360
+    } else {
+      return number
+    }
+  }
+
+  #convertToFeet(fromUnit, number) {
+    if (fromUnit === 'meters') {
+      return number * 3.281
+    } else if (fromUnit === 'kilometers') {
+      return number * 3280.84
+    } else if (fromUnit === 'inches') {
+      return number / 12
+    } else if (fromUnit === 'yards') {
+      return number * 3
+    } else if (fromUnit === 'miles') {
+      return number * 5280
+    } else {
+      return number
+    }
+  }
+
+  #convertToYards(fromUnit, number) {
+    if (fromUnit === 'meters') {
+      return number * 1.094
+    } else if (fromUnit === 'kilometers') {
+      return number * 1093.613
+    } else if (fromUnit === 'inches') {
+      return number / 36
+    } else if (fromUnit === 'feet') {
+      return number / 3
+    } else if (fromUnit === 'miles') {
+      return number * 1760
+    } else {
+      return number
+    }
+  }
+
+  #convertToMiles(fromUnit, number) {
+    if (fromUnit === 'meters') {
+      return number / 1609.34
+    } else if (fromUnit === 'kilometers') {
+      return number / 1.609
+    } else if (fromUnit === 'inches') {
+      return number / 63360
+    } else if (fromUnit === 'feet') {
+      return number / 5280
+    } else if (fromUnit === 'yards') {
+      return number / 1760
+    } else {
+      return number
+    }
+  }
+
+  
 
   /**
    * Converts a number of minutes to a specified unit of time.
@@ -243,7 +365,7 @@ export class UnitConverter {
    * @param {number} number - The number of minutes to convert
    * @returns {number | boolean} - The converted value, or false if the input is invalid.
    */
-  #validateNumber (number) {
+  #validateNumber(number) {
     if (isNaN(number)) {
       return false
     } else {
@@ -257,7 +379,7 @@ export class UnitConverter {
    * @param {string} unit - The unit to validate.
    * @returns {boolean} - True if the unit is valid, false otherwise.
    */
-  #validateTimeUnitType (unit) {
+  #validateTimeUnitType(unit) {
     if (
       unit === 'minutes' ||
       unit === 'hours' ||
@@ -270,7 +392,11 @@ export class UnitConverter {
     }
   }
 
-  #validateTempUnitType (unit) {
+  /**
+   *
+   * @param unit
+   */
+  #validateTempUnitType(unit) {
     if (
       unit === 'celsius' ||
       unit === 'fahrenheit' ||
@@ -282,12 +408,31 @@ export class UnitConverter {
     }
   }
 
-  #validateWeightUnitType (unit) {
+  /**
+   *
+   * @param unit
+   */
+  #validateWeightUnitType(unit) {
     if (
       unit === 'grams' ||
       unit === 'kilograms' ||
       unit === 'pounds' ||
       unit === 'ounces'
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  #validateLengthUnitType(unit) {
+    if (
+      unit === 'meters' ||
+      unit === 'kilometers' ||
+      unit === 'inches' ||
+      unit === 'feet' ||
+      unit === 'yards' ||
+      unit === 'miles'
     ) {
       return true
     } else {

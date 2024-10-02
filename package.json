@@ -11,8 +11,5 @@
   },
   "keywords": [],
   "author": "Jakob Rejdemyhr <jr223mt@student.lnu.se>",
-  "license": "ISC",
-  "devDependencies": {
-    "@lnu/eslint-config": "^1.1.10"
-  }
+  "license": "ISC"
 }
