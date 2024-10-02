@@ -357,7 +357,138 @@ export class UnitConverter {
     }
   }
 
-  
+    /**
+   * Converts a number of volume units to a specific unit of volume.
+   *
+   * @param {number} number - The number of units to convert.
+   * @param {string} fromUnit - The unit type to convert from. Can be 'liters', 'milliliters', 'gallons', 'quarts', 'pints', 'cups'. 
+   * @param {string} toUnit - The unit to convert to. Can be 'liters', 'milliliters', 'gallons', 'quarts', 'pints', 'cups'.
+   * @returns {number | boolean} - The converted value, or false if the input is invalid.
+   */
+  volumeConverter(number, fromUnit, toUnit) {
+    if (!this.#validateNumber(number)) {
+      return 'invalidInput'
+    }
+
+    if (!this.#validateVolumeUnitType(toUnit)) {
+      return 'invalidInput'
+    }
+
+    if (!this.#validateVolumeUnitType(fromUnit)) {
+      return 'invalidInput'
+    }
+
+    switch (toUnit) {
+      case 'liters':
+        return this.#convertToLiters(fromUnit, number)
+      case 'milliliters':
+        return this.#convertToMilliliters(fromUnit, number)
+      case 'gallons':
+        return this.#convertToGallons(fromUnit, number)
+      case 'quarts':
+        return this.#convertToQuarts(fromUnit, number)
+      case 'pints':
+        return this.#convertToPints(fromUnit, number)
+      case 'cups':
+        return this.#convertToCups(fromUnit, number)
+    }
+  }
+
+  #convertToLiters(fromUnit, number) {
+    if (fromUnit === 'milliliters') {
+      return number / 1000
+    } else if (fromUnit === 'gallons') {
+      return number * 3.785
+    } else if (fromUnit === 'quarts') {
+      return number / 1.057
+    } else if (fromUnit === 'pints') {
+      return number / 2.113
+    } else if (fromUnit === 'cups') {
+      return number / 4.227
+    } else {
+      return number
+    }
+  }
+
+  #convertToMilliliters(fromUnit, number) {
+    if (fromUnit === 'liters') {
+      return number * 1000
+    } else if (fromUnit === 'gallons') {
+      return number * 3785.41
+    } else if (fromUnit === 'quarts') {
+      return number * 946.353
+    } else if (fromUnit === 'pints') {
+      return number * 473.176
+    } else if (fromUnit === 'cups') {
+      return number * 236.588
+    } else {
+      return number
+    }
+  }
+
+  #convertToGallons(fromUnit, number) {
+    if (fromUnit === 'liters') {
+      return number / 3.785
+    } else if (fromUnit === 'milliliters') {
+      return number / 3785.41
+    } else if (fromUnit === 'quarts') {
+      return number / 4
+    } else if (fromUnit === 'pints') {
+      return number / 8
+    } else if (fromUnit === 'cups') {
+      return number / 16
+    } else {
+      return number
+    }
+  }
+
+  #convertToQuarts(fromUnit, number) {
+    if (fromUnit === 'liters') {
+      return number * 1.057
+    } else if (fromUnit === 'milliliters') {
+      return number / 946.353
+    } else if (fromUnit === 'gallons') {
+      return number * 4
+    } else if (fromUnit === 'pints') {
+      return number / 2
+    } else if (fromUnit === 'cups') {
+      return number / 4
+    } else {
+      return number
+    }
+  }
+
+  #convertToPints(fromUnit, number) {
+    if (fromUnit === 'liters') {
+      return number * 2.113
+    } else if (fromUnit === 'milliliters') {
+      return number / 473.176
+    } else if (fromUnit === 'gallons') {
+      return number * 8
+    } else if (fromUnit === 'quarts') {
+      return number * 2
+    } else if (fromUnit === 'cups') {
+      return number / 2
+    } else {
+      return number
+    }
+  }
+
+  #convertToCups(fromUnit, number) {
+    if (fromUnit === 'liters') {
+      return number * 4.227
+    } else if (fromUnit === 'milliliters') {
+      return number / 236.588
+    } else if (fromUnit === 'gallons') {
+      return number * 16
+    } else if (fromUnit === 'quarts') {
+      return number * 4
+    } else if (fromUnit === 'pints') {
+      return number * 2
+    } else {
+      return number
+    }
+  }
 
   /**
    * Converts a number of minutes to a specified unit of time.
@@ -433,6 +564,21 @@ export class UnitConverter {
       unit === 'feet' ||
       unit === 'yards' ||
       unit === 'miles'
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  #validateVolumeUnitType(unit) {
+    if (
+      unit === 'liters' ||
+      unit === 'milliliters' ||
+      unit === 'gallons' ||
+      unit === 'quarts' ||
+      unit === 'pints' ||
+      unit === 'cups'
     ) {
       return true
     } else {
