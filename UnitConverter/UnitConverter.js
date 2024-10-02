@@ -1,5 +1,5 @@
 /**
- *
+ * A class that converts units of time, temperature, weight, length, and volume.
  */
 export class UnitConverter {
   /**
@@ -490,12 +490,6 @@ export class UnitConverter {
     }
   }
 
-  /**
-   * Converts a number of minutes to a specified unit of time.
-   *
-   * @param {number} number - The number of minutes to convert
-   * @returns {number | boolean} - The converted value, or false if the input is invalid.
-   */
   #validateNumber(number) {
     if (isNaN(number)) {
       return false
@@ -504,12 +498,6 @@ export class UnitConverter {
     }
   }
 
-  /**
-   * Validates if the entered string is a time unit type.
-   *
-   * @param {string} unit - The unit to validate.
-   * @returns {boolean} - True if the unit is valid, false otherwise.
-   */
   #validateTimeUnitType(unit) {
     if (
       unit === 'minutes' ||
@@ -523,10 +511,6 @@ export class UnitConverter {
     }
   }
 
-  /**
-   *
-   * @param unit
-   */
   #validateTempUnitType(unit) {
     if (
       unit === 'celsius' ||
@@ -539,10 +523,6 @@ export class UnitConverter {
     }
   }
 
-  /**
-   *
-   * @param unit
-   */
   #validateWeightUnitType(unit) {
     if (
       unit === 'grams' ||

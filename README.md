@@ -1,2 +1,48 @@
-# 1DV610-A2
-Assignment 2 till 1DV610-kodkvalité kurs
+## Unit Converter Module
+
+## Overview:
+    The Unit Converter Module allows conversion between various units in categories such as length, weight, temperature, volume, and time. This module is designed to be simple to use, modular, and flexible for various applications where unit conversions are needed.
+
+## Features:
+    Convert between multiple units for different categories. time, temp, weight, length and volume
+    Easy to extend by adding new categories or units.
+    Modular design with separate conversion logic for each category.
+    Clear error handling for invalid unit conversions.
+
+## All supported units can be converted interchangeably within their respective categories.
+
+## Supported time conversion types:
+    minutes
+    hours
+    days
+    seconds
+
+## Supported temperature conversion types:
+    celsius
+    fahrenheit
+    kelvin
+
+## Supported weight conversion types:
+    grams
+    kilograms
+    pounds
+    ounces
+
+## Supported length conversion types:
+    meters
+    kilometers
+    inches
+    feet
+    yards
+    miles
+
+## Supported volume conversion types:
+    liters
+    milliliters
+    gallons
+    quarts
+    pints
+    cups
+
+## Example use of module:
+![weightConverter](./exampleUse.png)
