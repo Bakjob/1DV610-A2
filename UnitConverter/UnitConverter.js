@@ -212,7 +212,7 @@ export class UnitConverter {
    * @param {number} fromUnit - The unit to convert from.
    * @param {number} toUnit - The unit to convert to.
    * @param {number} group - The group to convert within.
-   * @returns - The converted values.
+   * @returns {array} - An array with the converted values.
    */
   #batchConvert(values, fromUnit, toUnit, group) {
     return values.map(value => this.#convert(value, fromUnit, toUnit, group))

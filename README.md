@@ -58,6 +58,18 @@ How to add to your project:
     mph
     knots
 
+## Supported area conversion types:
+    sqm
+    sqkm
+    sqft
+    sqyd
+    sqmi
+    sqin
+    sqcm
+    sqmm
+    acre
+    hectare
+
 ## Converting arrays is also supported using the same methods.
 
 ## Example use of module:
