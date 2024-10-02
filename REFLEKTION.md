@@ -7,3 +7,11 @@
 4. Abstraktion: Igen gjorde jag mitt bästa med att varje funktion endast skulle göra en enda sak var. Tror jag lyckats med det ganska så bra, det finns alltid förbättringar att göra. SÅ som att bryta ut alla kontrollsatser i de publika metoderna. Men det fick jag inte tid med. Annars är jag i stort sätt nöjd. Jag har tidigare ofta haft problem med att mina funktioner blir för långa och gör för mycket vilket gör att koden blir svår att läsa och underhålla. Det är något jag nu är mer medveten om och försöker förbättra genom att dela upp koden i mer logiska och separerade steg. Men det är fortfarande inte perfekt måste jag medge. Fick detta från kapitel 3.
 
 5. Testbarhet: Genom att bryta ner din kod till mindre, mer fokuserade funktioner har du inte bara förbättrat läsbarheten utan också gjort koden mer testbar. Mindre funktioner som gör en enda sak är lättare att testa isolerat, vilket bidrar till bättre testtäckning och mer robust kod. Dessutom, om något skulle behöva ändras i framtiden, är det nu enklare att lokalisera och justera en specifik funktion utan att påverka andra delar av programmet. Det har jag reflekterat mycket över här eftersom det inte bara förbättrar kvaliteten på koden i det nuvarande projektet, det är även bra för kommande projekt.
+
+Bättre tester hade jag gärna velat utföra. Nu finns det även så pass många utfall av min kod så att testfilen skulle bli otroligt lång och jag har inte den tiden eller orken. Så det blev typ 10 random testfall per publik funktion. Det är inte så avancerad kod så det är säkert ok och allt fungerar säkert som det ska endå.
+
+| Namn och förklaring    | Reflektion och regler från Clean Code |
+| -------- | ------- |
+| UnitConverter, mainklass namnet  | Inget att anmärka här, den är korrekt namngedd utifrån boken. Den har ett "intention-revealing name". Det går att ta reda på vad den gör utifrån namnet. Sen kan unit betyda många olika saker men det är det som är poängen. Denna modul ska kunna konvertera mycket olika saker.    |
+| February | $80     |
+| March    | $420    |

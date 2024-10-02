@@ -4,7 +4,7 @@ How to add to your project:
     This entire module is based in a single file for maximum ease to install. Just add the UnitConverter.js file to your project and import it wherever you please.
 
 ## Overview:
-    The Unit Converter Module allows conversion between various units in categories such as length, weight, temperature, volume, and time. This module is designed to be simple to use, modular, and flexible for various applications where unit conversions are needed.
+    The Unit Converter Module allows conversion between various units in categories such as length, weight, temperature, volume, speed, area and time. This module is designed to be simple to use, modular, and flexible for various applications where unit conversions are needed.
 
 ## Features:
     Convert between multiple units for different categories. time, temp, weight, length and volume
