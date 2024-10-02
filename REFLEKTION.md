@@ -13,7 +13,14 @@ Bättre tester hade jag gärna velat utföra. Nu finns det även så pass många
 | Namn och förklaring    | Reflektion och regler från Clean Code |
 | -------- | ------- |
 | UnitConverter, mainklass namnet  | Inget att anmärka som fel här, den är korrekt namngedd utifrån boken. Den har ett "intention-revealing name". Det går att ta reda på vad den gör utifrån namnet. Sen kan unit betyda många olika saker men det är det som är poängen. Denna modul ska kunna konvertera mycket olika saker. Den är också ett "noun" UnitConverter. Den refererar till en "sak".   |
-| validateUnit | Dessa skulle man kunna göra argumentet för att de borde heta isUnit, för att signera att det är ett booliskt värde. Men jag valde validate istället för is. Tänkte att det fortfarande passar bra.     |
+| validateNumber | Dennaa skulle man kunna göra argumentet för att de borde heta isNumber, för att visa  att det är ett booliskt värde som returneras. Men jag valde validate istället för is. Tänkte att det fortfarande passar bra.     |
 | validateUnit    | Denna tycker jag faktiskt passar bättre som valitadeUnit istället för isUnit. Bara för att isUnit menar på att den kollar om värdet ÄR en unit. Men det hade förvirrat mer tycker jag. Den kollar om något är en unit, vad är en unit? Inte tydligt från namnet. Så jag tycker validate är bättre där.    |
 | convert | i denna mainfunktion så tycker jag att jag har misslyckats med "Do one thing" denna metod ska endast konvertera värdet, men jag har även med felhantering i den vilekt är inkorrekt. Om jag hade mer tid så skulle jag bryta ut felhanteringen och lägga i en egen metod. Då kan man köra allt på en rad i convert metoden. Mycket snyggare och läsbart. |
-| | |
+| alla mina publika converter metoder | Jag tycker att dessa metoder är väl namngedda. Det är väldigt tydligt vad dessa gör. Jag funderade först på att döpa om dem till endast speed, temp, time osv men kom på att det inte var tydligt som användare av funktionen. Man kanske använder den som c.time(sakern man slänger in) då är det inte tydligt. timeConverter var bättre tyckte jag. |
+
+| Metodnamn eller variabler              | Antal rader | Reflektion |
+| :---------------- | :------: | ----: |
+| Convert        |   30+   | Denna metod har jag redan skrivit om. Den ska inte behöva göra felhantering. (Do one thing) |
+| conversionFactors           |   60+   | Det här är ingen metod men den är väldigt lång i mitt projekt. Det är här jag definerar värden man tar multiplicerat med inputvärdet (förrutom temp som kräver lite annan kod). Därmed namnet conversionFactors vilket är ett bra namn tycker jag. Den är dock alldeles för lång och krånglig att läsa. Men har svårt att se hur den skulle kunna brytas ur. Kanske i ett json dokument vid sidan om. Men jag ville ha allt i samma fil för enkelhetens skull. |
+| Annat    |  -   | Alla andra funktioner var väldigt korta vilket jag är nöjd med. Skulle nog vilja bryta ut felhantering ur alla mina ...Converter metoder. Just nu är det upprepning i varje. 
+Descriptive names - Ja. |
