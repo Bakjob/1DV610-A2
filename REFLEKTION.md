@@ -19,8 +19,9 @@ Bättre tester hade jag gärna velat utföra. Nu finns det även så pass många
 | alla mina publika converter metoder | Jag tycker att dessa metoder är väl namngedda. Det är väldigt tydligt vad dessa gör. Jag funderade först på att döpa om dem till endast speed, temp, time osv men kom på att det inte var tydligt som användare av funktionen. Man kanske använder den som c.time(sakern man slänger in) då är det inte tydligt. timeConverter var bättre tyckte jag. |
 
 | Metodnamn eller variabler              | Antal rader | Reflektion |
-| :---------------- | :------: | ----: |
+| :---------------- | :------: | :---- |
 | Convert        |   30+   | Denna metod har jag redan skrivit om. Den ska inte behöva göra felhantering. (Do one thing) |
 | conversionFactors           |   60+   | Det här är ingen metod men den är väldigt lång i mitt projekt. Det är här jag definerar värden man tar multiplicerat med inputvärdet (förrutom temp som kräver lite annan kod). Därmed namnet conversionFactors vilket är ett bra namn tycker jag. Den är dock alldeles för lång och krånglig att läsa. Men har svårt att se hur den skulle kunna brytas ur. Kanske i ett json dokument vid sidan om. Men jag ville ha allt i samma fil för enkelhetens skull. |
-| Annat    |  -   | Alla andra funktioner var väldigt korta vilket jag är nöjd med. Skulle nog vilja bryta ut felhantering ur alla mina ...Converter metoder. Just nu är det upprepning i varje. 
-Descriptive names - Ja. |
+| Annat    |  -   | Alla andra funktioner var väldigt korta vilket jag är nöjd med. Skulle nog vilja bryta ut felhantering ur alla mina ...Converter metoder, möjligt att man inte behöver alla olika converter metoder, man kanske kan definera vilken sorts konvertering man vill göra i anropet. Annars är det just nu är det upprepning av kod i varje. Descriptive names - Ja. En kritik mot dem är som det står i boken i kapitel 3 under Triads delen. Det är inte jättebra design att användaren ska behöva lägga in 3 olika värden i sina anrop till metoderna. Det är mycket svårare att förstå än om man bara behöver lägga in ett argument. Men jag har inte en bra lösning på det så det är bara att gilla läget. "Have no side effects - kap 3" Jag hittar inga sidoeffekter som kan hända i min kod så detta följer jag. |
+
+Mycket av detta hade givit mig större problem om koden var mer komplicerad. Jag höll det relativt simpelt så clean code var lätt att följa.

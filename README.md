@@ -1,4 +1,5 @@
 ## Unit Converter Module
+This module converts units of measurement for you! Length, weight, temperature, volume, speed, time and area are supported!
 
 How to add to your project:
     This entire module is based in a single file for maximum ease to install. Just add the UnitConverter.js file to your project and import it wherever you please.
