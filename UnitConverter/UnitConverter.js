@@ -21,7 +21,7 @@ export class UnitConverter {
     return this.#unitGroups[group].includes(unit)
   }
 
-  // Conversion factors for every supported type.
+  // Conversion factors for every supported type. Very easy to add more types later.
   #conversionFactors = {
     time: {
       seconds: { minutes: 1 / 60, hours: 1 / 3600, days: 1 / 86400, seconds: 1 },
@@ -30,9 +30,21 @@ export class UnitConverter {
       days: { seconds: 86400, minutes: 1440, hours: 24, days: 1 }
     },
     temp: {
-      celsius: { fahrenheit: (n) => (n * 9 / 5 + 32), kelvin: (n) => n + 273.15, celsius: (n) => n },
-      fahrenheit: { celsius: (n) => (n - 32) * 5 / 9, kelvin: (n) => (n + 459.67) * 5 / 9, fahrenheit: (n) => n },
-      kelvin: { celsius: (n) => n - 273.15, fahrenheit: (n) => n * 9 / 5 - 459.67, kelvin: (n) => n }
+      celsius: {
+        fahrenheit: (n) => (n * 9 / 5 + 32), // Arrow function for converting celsius to fahrenheit.
+        kelvin: (n) => n + 273.15, // Kelvin.
+        celsius: (n) => n // Celsius.
+      }, 
+      fahrenheit: {
+        celsius: (n) => (n - 32) * 5 / 9, // Fahrenheit to celsius.
+        kelvin: (n) => (n + 459.67) * 5 / 9, // Kelvin.
+        fahrenheit: (n) => n // Fahrenheit.
+      }, 
+      kelvin: {
+        celsius: (n) => n - 273.15, // Kelvin to celsius.
+        fahrenheit: (n) => n * 9 / 5 - 459.67, // Fahrenheit.
+        kelvin: (n) => n // Kelvin.
+      } 
     },
     weight: {
       grams: { kilograms: 1 / 1000, pounds: 0.00220462, ounces: 0.035274 },
@@ -41,10 +53,20 @@ export class UnitConverter {
       ounces: { grams: 28.3495, kilograms: 0.0283495, pounds: 0.0625 }
     },
     length: {
-      
+      meters: { kilometers: 0.001, inches: 39.3701, feet: 3.28084, yards: 1.09361, miles: 0.000621371 },
+      kilometers: { meters: 1000, inches: 39370.1, feet: 3280.84, yards: 1093.61, miles: 0.621371 },
+      inches: { meters: 0.0254, kilometers: 0.0000254, feet: 0.0833333, yards: 0.0277778, miles: 0.000015783 },
+      feet: { meters: 0.3048, kilometers: 0.0003048, inches: 12, yards: 0.333333, miles: 0.000189394 },
+      yards: { meters: 0.9144, kilometers: 0.0009144, inches: 36, feet: 3, miles: 0.000568182 },
+      miles: { meters: 1609.34, kilometers: 1.60934, inches: 63360, feet: 5280, yards: 1760 }
     },
     volume: {
-
+      liters: { milliliters: 1000, gallons: 0.264172, quarts: 1.05669, pints: 2.11338, cups: 4.22675 },
+      milliliters: { liters: 0.001, gallons: 0.000264172, quarts: 0.00105669, pints: 0.00211338, cups: 0.00422675 },
+      gallons: { liters: 3.78541, milliliters: 3785.41, quarts: 4, pints: 8, cups: 16 },
+      quarts: { liters: 0.946353, milliliters: 946.353, gallons: 0.25, pints: 2, cups: 4 },
+      pints: { liters: 0.473176, milliliters: 473.176, gallons: 0.125, quarts: 0.5, cups: 2 },
+      cups: { liters: 0.236588, milliliters: 236.588, gallons: 0.0625, quarts: 0.25, pints: 0.5 }
     }
   }
 
