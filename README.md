@@ -52,6 +52,12 @@ How to add to your project:
     pints
     cups
 
+## Supported speed conversion types:
+    ms - meter per second
+    kmh
+    mph
+    knots
+
 ## Converting arrays is also supported using the same methods.
 
 ## Example use of module:

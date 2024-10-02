@@ -19,10 +19,12 @@ export class UnitConverter {
     temp: ['celsius', 'fahrenheit', 'kelvin'],
     weight: ['grams', 'kilograms', 'pounds', 'ounces', 'stones',],
     length: ['meters', 'kilometers', 'inches', 'feet', 'yards', 'miles'],
-    volume: ['liters', 'milliliters', 'gallons', 'quarts', 'pints', 'cups']
+    volume: ['liters', 'milliliters', 'gallons', 'quarts', 'pints', 'cups'],
+    speed: ['ms', 'kmh', 'mph', 'knots'],
+    area: ['sqm', 'sqkm', 'sqft', 'sqyd', 'sqmi', 'sqin', 'sqcm', 'sqmm', 'acre', 'hectare'],
   }
 
-  // Validering för att säkerställa att enheten finns inom en given grupp
+  // Validate the unit against the group to see if it exists.
   #validateUnit(unit, group) {
     if (!this.#unitGroups[group].includes(unit)) {
       console.error(`Invalid unit: ${unit}. Valid units for ${group} are ${this.#unitGroups[group].join(', ')}`)
@@ -48,17 +50,17 @@ export class UnitConverter {
         fahrenheit: (n) => (n * 9 / 5 + 32), // Arrow function for converting celsius to fahrenheit.
         kelvin: (n) => n + 273.15, // Kelvin.
         celsius: (n) => n // Celsius.
-      }, 
+      },
       fahrenheit: {
         celsius: (n) => (n - 32) * 5 / 9, // Fahrenheit to celsius.
         kelvin: (n) => (n + 459.67) * 5 / 9, // Kelvin.
         fahrenheit: (n) => n // Fahrenheit.
-      }, 
+      },
       kelvin: {
         celsius: (n) => n - 273.15, // Kelvin to celsius.
         fahrenheit: (n) => n * 9 / 5 - 459.67, // Fahrenheit.
         kelvin: (n) => n // Kelvin.
-      } 
+      }
     },
     weight: {
       grams: { kilograms: 1 / 1000, pounds: 0.00220462, ounces: 0.035274 },
@@ -82,6 +84,24 @@ export class UnitConverter {
       quarts: { liters: 0.946353, milliliters: 946.353, gallons: 0.25, pints: 2, cups: 4 },
       pints: { liters: 0.473176, milliliters: 473.176, gallons: 0.125, quarts: 0.5, cups: 2 },
       cups: { liters: 0.236588, milliliters: 236.588, gallons: 0.0625, quarts: 0.25, pints: 0.5 }
+    },
+    speed: {
+      ms: { kmh: 3.6, mph: 2.23694, knots: 1.94384 },
+      kmh: { ms: 0.277778, mph: 0.621371, knots: 0.539957 },
+      mph: { ms: 0.44704, kmh: 1.60934, knots: 0.868976 },
+      knots: { ms: 0.514444, kmh: 1.852, mph: 1.15078 }
+    },
+    area: {
+      sqm: { sqkm: 0.000001, sqft: 10.7639, sqyd: 1.19599, sqmi: 3.861e-7, sqin: 1550, sqcm: 10000, sqmm: 1000000, acre: 0.000247105, hectare: 1e-4 },
+      sqkm: { sqm: 1000000, sqft: 10763900.0, sqyd: 1195990.0, sqmi: 0.386102, sqin: 1550000000, sqcm: 10000000000, sqmm: 1000000000000, acre: 247.105, hectare: 100 },
+      sqft: { sqm: 0.092903, sqkm: 9.2903e-6, sqyd: 0.111111, sqmi: 3.587e-8, sqin: 144, sqcm: 929.03, sqmm: 92903, acre: 0.0000229568, hectare: 9.2903e-6 },
+      sqyd: { sqm: 0.836127, sqkm: 8.3613e-6, sqft: 9, sqmi: 3.2283e-7, sqin: 1296, sqcm: 8361.27, sqmm: 836127, acre: 0.000206612, hectare: 8.3613e-5 },
+      sqmi: { sqm: 2589988.11, sqkm: 2.589988, sqft: 27878400, sqyd: 3097600, sqin: 4014489600, sqcm: 25899881100, sqmm: 2589988110000, acre: 640, hectare: 258.998811 },
+      sqin: { sqm: 0.00064516, sqkm: 6.4516e-10, sqft: 0.00694444, sqyd: 0.000771605, sqmi: 2.49098e-10, sqcm: 6.4516, sqmm: 645.16, acre: 1.59423e-7, hectare: 6.4516e-8 },
+      sqcm: { sqm: 0.0001, sqkm: 1e-8, sqft: 0.00107639, sqyd: 0.000119599, sqmi: 3.861e-11, sqin: 0.155, sqmm: 100, acre: 2.47105e-8, hectare: 1e-4 },
+      sqmm: { sqm: 1e-6, sqkm: 1e-12, sqft: 0.0000107639, sqyd: 0.00000119599, sqmi: 3.861e-13, sqin: 0.00155, sqcm: 0.01, acre: 2.47105e-9, hectare: 1e-6 },
+      acre: { sqm: 4046.86, sqkm: 0.00404686, sqft: 43560, sqyd: 4840, sqmi: 0.0015625, sqin: 6272640, sqcm: 40468600, sqmm: 4046860000, hectare: 0.404686 },
+      hectare: { sqm: 10000, sqkm: 0.01, sqft: 107639, sqyd: 11960, sqmi: 0.00386102, sqin: 15500000, sqcm: 100000000, sqmm: 10000000000, acre: 2.47105 }
     }
   }
 
@@ -89,20 +109,25 @@ export class UnitConverter {
   #convert(number, fromUnit, toUnit, group) {
     if (number < 0 && group === 'time') { // Negative time values are not supported.
       console.error('Negative time values are not supported.')
-      return 'invalidInput'
+      return
     }
 
     if (number === Infinity || number === -Infinity) { // Infinite values are not allowed.
       console.error('Infinite values are not allowed.')
-      return 'invalidInput'
+      return
     }
 
-    if (!this.#validateNumber(number)) { // Validate the number first.
-      return 'invalidInput'
+    if (group === 'temp' && fromUnit === 'kelvin' && number < 0) { // Negative Kelvin values are impossible.
+      console.error('Negative Kelvin values are not allowed.')
+      return
+    }
+
+    if (!this.#validateNumber(number)) { // Validate the number.
+      return
     }
 
     if (!this.#validateUnit(fromUnit, group) || !this.#validateUnit(toUnit, group)) { // Validate the units.
-      return 'invalidInput'
+      return
     }
 
     // Get the conversion factor from the conversionFactors object and store it in a variable.
@@ -126,9 +151,9 @@ export class UnitConverter {
    */
   timeConverter(number, fromUnit, toUnit) {
     if (Array.isArray(number)) {
-      return this.#batchConvert(number, fromUnit, toUnit, 'time');
+      return this.#batchConvert(number, fromUnit, toUnit, 'time')
     } else {
-      return this.#convert(number, fromUnit, toUnit, 'time');
+      return this.#convert(number, fromUnit, toUnit, 'time')
     }
   }
 
@@ -161,6 +186,22 @@ export class UnitConverter {
       return this.#batchConvert(number, fromUnit, toUnit, 'volume')
     } else {
       return this.#convert(number, fromUnit, toUnit, 'volume')
+    }
+  }
+
+  speedConverter(number, fromUnit, toUnit) {
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'speed')
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'speed')
+    }
+  }
+
+  areaConverter(number, fromUnit, toUnit) {
+    if (Array.isArray(number)) {
+      return this.#batchConvert(number, fromUnit, toUnit, 'area')
+    } else {
+      return this.#convert(number, fromUnit, toUnit, 'area')
     }
   }
 

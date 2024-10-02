@@ -20,8 +20,8 @@ const invalidInput = Converter.timeConverter('invalid', 'hours', 'days')
 console.log(invalidInput)
 
 // Testfall 4
-const invalidOutput = Converter.timeConverter(24, 'hours', 'invalid')
-console.log(invalidOutput)
+const invalidInput2 = Converter.timeConverter(24, 'hours', 'invalid')
+console.log(invalidInput2)
 
 // Testfall 5
 const minsToHours = Converter.timeConverter(60, 'minutes', 'hours')
@@ -51,8 +51,8 @@ const invalidInputTemp = Converter.tempConverter('invalid', 'celsius', 'fahrenhe
 console.log(invalidInputTemp)
 
 // Testfall 4
-const invalidOutputTemp = Converter.tempConverter(0, 'celsius', 'invalid')
-console.log(invalidOutputTemp)
+const invalidInputTemp2 = Converter.tempConverter(0, 'celsius', 'invalid')
+console.log(invalidInputTemp2)
 
 // Testfall 5
 const celsiusToKelvin = Converter.tempConverter(0, 'celsius', 'kelvin')
@@ -86,8 +86,8 @@ const invalidInputWeight = Converter.weightConverter('invalid', 'grams', 'kilogr
 console.log(invalidInputWeight)
 
 // Testfall 4
-const invalidOutputWeight = Converter.weightConverter(1, 'grams', 'invalid')
-console.log(invalidOutputWeight)
+const invalidInputWeight2 = Converter.weightConverter(1, 'grams', 'invalid')
+console.log(invalidInputWeight2)
 
 // Testfall 5
 const kilogramsToPounds = Converter.weightConverter(1, 'kilograms', 'pounds')
@@ -129,8 +129,8 @@ const invalidInputLength = Converter.lengthConverter('invalid', 'meters', 'kilom
 console.log(invalidInputLength)
 
 // Testfall 4
-const invalidOutputLength = Converter.lengthConverter(1, 'meters', 'invalid')
-console.log(invalidOutputLength)
+const invalidInputLength2 = Converter.lengthConverter(1, 'meters', 'invalid')
+console.log(invalidInputLength2)
 
 // Testfall 5
 const metersToFeet = Converter.lengthConverter(1, 'meters', 'feet')
@@ -172,8 +172,8 @@ const invalidInputVolume = Converter.volumeConverter('invalid', 'liters', 'milli
 console.log(invalidInputVolume)
 
 // Testfall 4
-const invalidOutputVolume = Converter.volumeConverter(1, 'liters', 'invalid')
-console.log(invalidOutputVolume)
+const invalidInputVolume2 = Converter.volumeConverter(1, 'liters', 'invalid')
+console.log(invalidInputVolume2)
 
 // Testfall 5
 const litersToCups = Converter.volumeConverter(1, 'liters', 'cups')
@@ -198,3 +198,89 @@ console.log('236.588 milliliters to cups: ', millilitersToCups)
 // Testfall 10
 const cupsToMilliliters = Converter.volumeConverter(1, 'cups', 'milliliters')
 console.log('1 cup to milliliters: ', cupsToMilliliters)
+
+// speed TESTS ##########################################################################################################
+console.log('speed TESTS ##########################################################################################################')
+
+// Testfall 1
+const kmhToMph = Converter.speedConverter(100, 'kmh', 'mph')
+console.log('100 km/h to mph: ', kmhToMph)
+
+// Testfall 2
+const mphToKmh = Converter.speedConverter(62.1371, 'mph', 'kmh')
+console.log('62.1371 mph to km/h: ', mphToKmh)
+
+// Testfall 3
+const invalidInputSpeed = Converter.speedConverter('invalid', 'kmh', 'mph')
+console.log(invalidInputSpeed)
+
+// Testfall 4
+const invalidInputSpeed2 = Converter.speedConverter(100, 'kmh', 'invalid')
+console.log(invalidInputSpeed2)
+
+// Testfall 5
+const kmhToMs = Converter.speedConverter(100, 'kmh', 'ms')
+console.log('100 km/h to m/s: ', kmhToMs)
+
+// Testfall 6
+const msToKmh = Converter.speedConverter(27.7778, 'ms', 'kmh')
+console.log('27.7778 m/s to km/h: ', msToKmh)
+
+// Testfall 7
+const mphToMs = Converter.speedConverter(62.1371, 'mph', 'ms')
+console.log('62.1371 mph to m/s: ', mphToMs)
+
+// Testfall 8
+const msToMph = Converter.speedConverter(27.7778, 'ms', 'mph')
+console.log('27.7778 m/s to mph: ', msToMph)
+
+// Testfall 9
+const kmhToKnots = Converter.speedConverter(100, 'kmh', 'knots')
+console.log('100 km/h to knots: ', kmhToKnots)
+
+// Testfall 10
+const knotsToKmh = Converter.speedConverter(51.4444, 'knots', 'kmh')
+console.log('51.4444 knots to km/h: ', knotsToKmh)
+
+// area TESTS ##########################################################################################################
+console.log('area TESTS ##########################################################################################################')
+
+// Testfall 1
+const sqmToSqft = Converter.areaConverter(1, 'sqm', 'sqft')
+console.log('1 sqm to sqft: ', sqmToSqft)
+
+// Testfall 2
+const sqftToSqm = Converter.areaConverter(10.7639, 'sqft', 'sqm')
+console.log('10.7639 sqft to sqm: ', sqftToSqm)
+
+// Testfall 3
+const invalidInputArea = Converter.areaConverter('invalid', 'sqm', 'sqft')
+console.log(invalidInputArea)
+
+// Testfall 4
+const invalidInputArea2 = Converter.areaConverter(1, 'sqm', 'invalid')
+console.log(invalidInputArea2)
+
+// Testfall 5
+const sqmToSqyd = Converter.areaConverter(1, 'sqm', 'sqyd')
+console.log('1 sqm to sqyd: ', sqmToSqyd)
+
+// Testfall 6
+const sqydToSqm = Converter.areaConverter(0.836127, 'sqyd', 'sqm')
+console.log('0.836127 sqyd to sqm: ', sqydToSqm)
+
+// Testfall 7
+const sqftToSqyd = Converter.areaConverter(9, 'sqft', 'sqyd')
+console.log('9 sqft to sqyd: ', sqftToSqyd)
+
+// Testfall 8
+const sqydToSqft = Converter.areaConverter(1, 'sqyd', 'sqft')
+console.log('1 sqyd to sqft: ', sqydToSqft)
+
+// Testfall 9
+const sqmToAcre = Converter.areaConverter(4046.86, 'sqm', 'acre')
+console.log('4046.86 sqm to acre: ', sqmToAcre)
+
+// Testfall 10
+const acreToSqm = Converter.areaConverter(1, 'acre', 'sqm')
+console.log('1 acre to sqm: ', acreToSqm)
