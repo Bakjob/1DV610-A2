@@ -5,7 +5,8 @@ How to add to your project:
     This entire module is based in a single file for maximum ease to install. Just add the UnitConverter.js file to your project and import it wherever you please.
 
 ## Overview:
-    The Unit Converter Module allows conversion between various units in categories such as length, weight, temperature, volume, speed, area and time. This module is designed to be simple to use, modular, and flexible for various applications where unit conversions are needed.
+    The Unit Converter Module allows conversion between various units in categories such as length, weight, temperature, volume, speed, area and time.
+    This module is designed to be simple to use, modular, and flexible for various applications where unit conversions are needed.
 
 ## Features:
     Convert between multiple units for different categories. time, temp, weight, length and volume
@@ -15,61 +16,16 @@ How to add to your project:
 
 ## All supported units can be converted interchangeably within their respective categories.
 
-## Supported time conversion types:
-    minutes
-    hours
-    days
-    seconds
-    milliseconds
-    microseconds
-    nanoseconds
-    picoseconds
+| **Conversion Type** | **Supported Units**                                                                                     |
+|---------------------|--------------------------------------------------------------------------------------------------------|
+| **Time**            | minutes, hours, days, seconds, milliseconds, microseconds, nanoseconds, picoseconds                    |
+| **Temperature**     | celsius, fahrenheit, kelvin                                                                            |
+| **Weight**          | grams, kilograms, pounds, ounces, stones                                                               |
+| **Length**          | meters, kilometers, inches, feet, yards, miles                                                         |
+| **Volume**          | liters, milliliters, gallons, quarts, pints, cups                                                      |
+| **Speed**           | ms (meters per second), kmh (kilometers per hour), mph (miles per hour), knots                         |
+| **Area**            | sqm (square meter), sqkm (square kilometer), sqft (square foot), sqyd (square yard), sqmi (square mile), sqin (square inch), sqcm (square centimeter), sqmm (square millimeter), acre, hectare |
 
-## Supported temperature conversion types:
-    celsius
-    fahrenheit
-    kelvin
-
-## Supported weight conversion types:
-    grams
-    kilograms
-    pounds
-    ounces
-    stones
-
-## Supported length conversion types:
-    meters
-    kilometers
-    inches
-    feet
-    yards
-    miles
-
-## Supported volume conversion types:
-    liters
-    milliliters
-    gallons
-    quarts
-    pints
-    cups
-
-## Supported speed conversion types:
-    ms - meter per second
-    kmh
-    mph
-    knots
-
-## Supported area conversion types:
-    sqm
-    sqkm
-    sqft
-    sqyd
-    sqmi
-    sqin
-    sqcm
-    sqmm
-    acre
-    hectare
 
 ## Converting arrays is also supported using the same methods.
 
