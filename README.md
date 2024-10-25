@@ -32,6 +32,7 @@ How to add to your project:
 ## Converting arrays is also supported using the same methods.
 
 ## Example use of module:
+![intalledFile](./exampleUseInstalled.png)
 ![weightConverter](./exampleUse.png)
 
 ## Explanation:
